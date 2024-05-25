@@ -21,7 +21,6 @@ const INIT_BACKGROUND_COLOR:Color = Color::BLACK;
 // INIT
 fn main() {
     let mut app = App::new();
-    app.init_asset::<sparrow_loader::SparrowSheet>();
     app.add_plugins((
         DefaultPlugins.set(
             WindowPlugin {
@@ -53,6 +52,7 @@ fn main() {
     app.add_systems(Update, make_visible);
     app.add_plugins(state::states_init_plugin);
     app.init_state::<state::GameState>();
+    app.init_asset::<sparrow_loader::SparrowSheet>();
     app.run();
 }
 
