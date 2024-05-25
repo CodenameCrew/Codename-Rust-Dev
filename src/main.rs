@@ -1,12 +1,14 @@
 use bevy::{
-    core::FrameCount,
     prelude::*,
+    core::FrameCount,
     window::{PresentMode, WindowTheme},
     render::{settings::*, RenderPlugin},
-    render::settings::RenderCreation::Automatic, core_pipeline::{tonemapping::Tonemapping, bloom::BloomSettings}
+    render::settings::RenderCreation::Automatic
 };
 use crate::WgpuSettingsPriority::Functionality;
+#[path = "states/state.rs"] mod state;
 
+// CONSTANTS
 // So we can hide the little flash of white while the engine gets ready...
 const INIT_FRAMES_BEFORE_SHOW:u32 = 4;
 // This is just cause I notice Backends::PRIMARY doesn't choose dx12 on windows, not sure about other platforms
@@ -14,6 +16,7 @@ const INIT_BACKEND:Backends = if cfg!(windows) {Backends::DX12} else {Backends::
 // Self explanitory, I think you just use Color::NONE for window transperency after you set it in the WindowPlugin
 const INIT_BACKGROUND_COLOR:Color = Color::BLACK;
 
+// INIT
 fn main() {
     App::new()
         // INIT
@@ -44,14 +47,9 @@ fn main() {
             })
         )
         .insert_resource(ClearColor(INIT_BACKGROUND_COLOR))
-        // GAME
-        .add_systems(Startup, setup)
-        .add_systems(
-            Update,
-            (
-                make_visible,
-            ),
-        )
+        .add_systems(Update, make_visible)
+        .add_plugins(state::states_init_plugin)
+        .init_state::<state::GameState>()
         .run();
 }
 
@@ -59,23 +57,4 @@ fn make_visible(mut window: Query<&mut Window>, frames: Res<FrameCount>) {
     if frames.0 == INIT_FRAMES_BEFORE_SHOW {
         window.single_mut().visible = true;
     }
-}
-
-// TODO: SET UP A STATES SYSTEM NOW, WE REALLY NEED IT
-fn setup(mut commands: Commands, asset_server: Res<AssetServer>) {
-    commands.spawn((
-        Camera2dBundle {
-            camera: Camera {
-                hdr: true,
-                ..default()
-            },
-            tonemapping: Tonemapping::TonyMcMapface,
-            ..default()
-        },
-        BloomSettings::default(),
-    ));
-    commands.spawn(SpriteBundle {
-        texture: asset_server.load("bevy_bird_dark.png"),
-        ..default()
-    });
 }
