@@ -1,5 +1,7 @@
 use bevy::prelude::*;
 
+#[path = "../utils/sparrow-loader.rs"] mod sparrow_loader;
+
 #[derive(Component)]
 pub struct TestingStateMember;
 #[derive(Component)]
@@ -10,6 +12,7 @@ pub mod testing_state {
         prelude::*,
         core_pipeline::{tonemapping::Tonemapping, bloom::BloomSettings}
     };
+    use crate::sparrow_loader;
     use crate::state::*;
     use super::TestingStateMember;
     use super::DumbassBird;
@@ -54,7 +57,7 @@ pub mod testing_state {
             ),
             TestingStateMember
         ));
-    
+        sparrow_loader::load_sparrow(asset_server);
     }
 
     pub fn update(time: Res<Time>, mut dumbass_bird_query:Query<&mut Transform, With<DumbassBird>>, keyboard_input: Res<ButtonInput<KeyCode>>, mut game_state: ResMut<NextState<GameState>>) {

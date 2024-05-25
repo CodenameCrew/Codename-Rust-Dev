@@ -5,8 +5,10 @@ use bevy::{
     render::{settings::*, RenderPlugin},
     render::settings::RenderCreation::Automatic
 };
+use bevy_common_assets::xml::XmlAssetPlugin;
 use crate::WgpuSettingsPriority::Functionality;
 #[path = "states/state.rs"] mod state;
+#[path = "utils/sparrow-loader.rs"] mod sparrow_loader;
 
 // CONSTANTS
 // So we can hide the little flash of white while the engine gets ready...
@@ -18,12 +20,12 @@ const INIT_BACKGROUND_COLOR:Color = Color::BLACK;
 
 // INIT
 fn main() {
-    App::new()
-        // INIT
-        .add_plugins(
-            DefaultPlugins.set(
-                WindowPlugin {
-                    primary_window: Some(Window {
+    let mut app = App::new();
+    app.init_asset::<sparrow_loader::SparrowSheet>();
+    app.add_plugins((
+        DefaultPlugins.set(
+            WindowPlugin {
+                primary_window: Some(Window {
                     title: "Friday Night Funkin' - Codename Engine".into(),
                     name: Some("CodenameEngine".into()),
                     resolution: (1280., 720.).into(),
@@ -44,13 +46,14 @@ fn main() {
                     }
                 ),
                 ..default()
-            })
-        )
-        .insert_resource(ClearColor(INIT_BACKGROUND_COLOR))
-        .add_systems(Update, make_visible)
-        .add_plugins(state::states_init_plugin)
-        .init_state::<state::GameState>()
-        .run();
+            }),
+        XmlAssetPlugin::<sparrow_loader::SparrowSheet>::new(&[".xml"]),
+    ));
+    app.insert_resource(ClearColor(INIT_BACKGROUND_COLOR));
+    app.add_systems(Update, make_visible);
+    app.add_plugins(state::states_init_plugin);
+    app.init_state::<state::GameState>();
+    app.run();
 }
 
 fn make_visible(mut window: Query<&mut Window>, frames: Res<FrameCount>) {
