@@ -13,7 +13,9 @@ pub mod testing_state {
         core_pipeline::{tonemapping::Tonemapping, bloom::BloomSettings}
     };
     use crate::sparrow_loader;
+    use crate::sparrow_loader::*;
     use crate::state::*;
+
     use super::TestingStateMember;
     use super::DumbassBird;
 
@@ -25,7 +27,7 @@ pub mod testing_state {
         .add_systems(OnExit(GameState::TestingState), despawn_state::<TestingStateMember>);
     }
 
-    pub fn create(mut commands: Commands, asset_server: Res<AssetServer>) {
+    pub fn create(mut commands: Commands, asset_server: Res<AssetServer>, mut texture_atlas_layouts: ResMut<Assets<TextureAtlasLayout>>) {
         commands.spawn((
             Camera2dBundle {
                 camera: Camera {
@@ -50,6 +52,21 @@ pub mod testing_state {
             DumbassBird,
             TestingStateMember
         ));
+
+        let logo_spritesheet:SparrowSprite = sparrow_loader::load_sparrow(asset_server, texture_atlas_layouts);
+        commands.spawn((
+            SpriteSheetBundle  {
+                transform: Transform {
+                    scale: Vec3::new(0.4, 0.4, 0.4),
+                    translation: Vec3::new(200.0, 0.0, 0.0),
+                    ..default()
+                }, 
+                atlas: logo_spritesheet.atlas,
+                ..default()
+            },
+            logo_spritesheet,
+            TestingStateMember,
+        ));
         commands.spawn((
             TextBundle::from_section(
                 "Press SPACE to switch to another state",
@@ -57,7 +74,6 @@ pub mod testing_state {
             ),
             TestingStateMember
         ));
-        sparrow_loader::load_sparrow(asset_server);
     }
 
     pub fn update(time: Res<Time>, mut dumbass_bird_query:Query<&mut Transform, With<DumbassBird>>, keyboard_input: Res<ButtonInput<KeyCode>>, mut game_state: ResMut<NextState<GameState>>) {
