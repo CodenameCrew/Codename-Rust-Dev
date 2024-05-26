@@ -5,10 +5,9 @@ use bevy::{
     render::{settings::*, RenderPlugin},
     render::settings::RenderCreation::Automatic
 };
-use bevy_common_assets::xml::XmlAssetPlugin;
 use crate::WgpuSettingsPriority::Functionality;
 #[path = "states/state.rs"] mod state;
-#[path = "utils/sparrow-loader.rs"] mod sparrow_loader;
+#[path = "util/sparrow.rs"] mod sparrow;
 
 // CONSTANTS
 // So we can hide the little flash of white while the engine gets ready...
@@ -46,13 +45,12 @@ fn main() {
                 ),
                 ..default()
             }),
-        XmlAssetPlugin::<sparrow_loader::SparrowSheet>::new(&[".xml"]),
     ));
     app.insert_resource(ClearColor(INIT_BACKGROUND_COLOR));
     app.add_systems(Update, make_visible);
     app.add_plugins(state::states_init_plugin);
     app.init_state::<state::GameState>();
-    app.init_asset::<sparrow_loader::SparrowSheet>();
+    app.add_systems(Update, sparrow::tick_animations);
     app.run();
 }
 

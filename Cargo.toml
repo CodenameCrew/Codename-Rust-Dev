@@ -7,8 +7,9 @@ edition = "2021"
 # bevy = "0.13.2"
 # !! THIS IS JUST FOR FAST RECOMPILES, REMOVE ON REALESE BUILDS
 bevy = { version = "0.13.2", features = ["dynamic_linking"] }
-bevy_common_assets = { version = "0.10.0", features = ["xml"] }
-serde = { version = "1.0.202", features = ["derive"] }
+serde = {version = "1.0.160", features = ["derive"]}
+serde-xml-rs = "0.6.0"
+bevy_sprite3d = "^2.0"
 
 # All stuff from bevy page (https://bevyengine.org/learn/quick-start/getting-started/setup/)
 [workspace]
