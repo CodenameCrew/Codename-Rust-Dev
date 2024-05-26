@@ -882,15 +882,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "bevy_sprite3d"
-version = "2.8.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "42d9fd96aa36399c5f76ce44b84faa944e708eb7d50e3b900f947c1bb8a7c3fd"
-dependencies = [
- "bevy",
-]
-
-[[package]]
 name = "bevy_tasks"
 version = "0.13.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1281,7 +1272,6 @@ name = "codename-rust-dev"
 version = "0.0.1"
 dependencies = [
  "bevy",
- "bevy_sprite3d",
  "serde",
  "serde-xml-rs",
 ]
