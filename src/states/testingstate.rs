@@ -88,7 +88,14 @@ pub mod testing_state {
         commands.spawn((
             TextBundle::from_section(
                 "Press SPACE to switch to another state",
-                TextStyle{font_size: 32.0, ..default()}
+                TextStyle{font_size: 20.0, ..default()}
+            ).with_style(
+                Style {
+                    position_type: PositionType::Absolute,
+                    bottom: Val::Px(8.0),
+                    left: Val::Px(14.0),
+                    ..default()
+                }
             ),
             TestingStateMember
         ));

@@ -30,8 +30,15 @@ pub mod main_menu_state {
         commands.spawn((
             TextBundle::from_section(
                 "IT'S ME MAIN MENU STATE!!!\nPress SPACE to switch back",
-                TextStyle{font_size: 40.0, ..default()}
-            ),
+                TextStyle{font_size: 20.0, ..default()}
+            ).with_style({
+                Style {
+                    position_type: PositionType::Absolute,
+                    bottom: Val::Px(8.0),
+                    left: Val::Px(14.0),
+                    ..default()
+                }
+            }),
             MainMenuStateMember
         ));
     }

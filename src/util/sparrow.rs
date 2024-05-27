@@ -274,7 +274,7 @@ impl SpriteXML {
     }
 }
 
-pub fn tick_animations(
+pub fn update(
     mut query: Query<(&mut SpriteXML, &mut Transform, &mut TextureAtlas)>,
     time: Res<Time>,
 ) {

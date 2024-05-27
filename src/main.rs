@@ -8,6 +8,7 @@ use bevy::{
 use crate::WgpuSettingsPriority::Functionality;
 #[path = "states/state.rs"] mod state;
 #[path = "util/sparrow.rs"] mod sparrow;
+#[path = "util/fpscounter.rs"] mod fpscounter;
 
 // CONSTANTS
 // So we can hide the little flash of white while the engine gets ready...
@@ -21,6 +22,7 @@ const INIT_BACKGROUND_COLOR:Color = Color::BLACK;
 fn main() {
     let mut app = App::new();
     app.add_plugins((
+        // INTERNAL STUFF
         DefaultPlugins.set(
             WindowPlugin {
                 primary_window: Some(Window {
@@ -48,9 +50,12 @@ fn main() {
     ));
     app.insert_resource(ClearColor(INIT_BACKGROUND_COLOR));
     app.add_systems(Update, make_visible);
+    // STATES
     app.add_plugins(state::states_init_plugin);
     app.init_state::<state::GameState>();
-    app.add_systems(Update, sparrow::tick_animations);
+    // EXTRA STUFF
+    app.add_systems(Update, sparrow::update);
+    app.add_plugins(fpscounter::fps_plugin);
     app.run();
 }
 
