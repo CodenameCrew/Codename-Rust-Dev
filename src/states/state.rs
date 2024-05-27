@@ -4,15 +4,21 @@ use bevy::prelude::*;
 // TODO: Find a actual way to do this thats not trash
 #[path = "testingstate.rs"] mod testingstate;
 #[path = "mainmenustate.rs"] mod mainmenustate;
+#[path = "playstate.rs"] mod playstate;
 
 #[derive(States, Default, Debug, Clone, PartialEq, Eq, Hash)]
 pub enum GameState {
     #[default] TestingState,
-    MainMenuState
+    MainMenuState,
+    PlayState
 }
 
 pub fn states_init_plugin(app: &mut App) {
-    app.add_plugins((testingstate::testing_state::plugin, mainmenustate::main_menu_state::plugin));
+    app.add_plugins((
+        testingstate::testing_state::plugin, 
+        mainmenustate::main_menu_state::plugin,
+        playstate::playstate::plugin,
+    ));
 }
 
 // Generic system that takes a component as a parameter, and will despawn all entities with that component

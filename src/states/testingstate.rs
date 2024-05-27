@@ -1,7 +1,8 @@
 pub mod testing_state {
     use bevy::{
         prelude::*,
-        core_pipeline::{tonemapping::Tonemapping, bloom::BloomSettings}
+        core_pipeline::{tonemapping::Tonemapping, bloom::BloomSettings},
+        render::camera::ScalingMode
     };
     use crate::state::*;
     use crate::sparrow::SpriteXMLBundle;
@@ -16,7 +17,6 @@ pub mod testing_state {
         pub x_speed:f32,
         pub y_speed:f32,
     }
-    
 
     pub fn plugin(app: &mut App) {
         app
@@ -36,6 +36,16 @@ pub mod testing_state {
                     hdr: true,
                     ..default()
                 },
+                /*
+                projection: OrthographicProjection {
+                    // don't forget to set `near` and `far`
+                    near: -1000.0,
+                    far: 1000.0,
+                    scaling_mode: ScalingMode::FixedVertical(720.0),
+                    // ... any other settings you want to change ...
+                    ..default()
+                },
+                */
                 tonemapping: Tonemapping::TonyMcMapface,
                 ..default()
             },
@@ -43,7 +53,7 @@ pub mod testing_state {
             TestingStateMember
         ));
 
-        match SpriteXMLBundle::new("logoBumpin".to_string(), &asset_server, texture_atlas_layouts) {
+        match SpriteXMLBundle::new("images/logoBumpin".to_string(), &asset_server, texture_atlas_layouts) {
             Some(mut spritesheet) => {
                 let mut spriteatlas: &mut TextureAtlas = &mut spritesheet.sprite_sheet.atlas;
                 spritesheet.spritexml.add_anim_from_prefix("logo bumpin".to_string(), true, 24);
@@ -75,7 +85,7 @@ pub mod testing_state {
                     translation: Vec3::new(1280.0/2.0 - 200.0, 720.0/2.0 - 100.0, 0.0),
                     ..default()
                 },
-                texture: asset_server.load("bevy_bird_dark.png"),
+                texture: asset_server.load("images/bevy_bird_dark.png"),
                 ..default()
             },
             TestingStateMember
@@ -83,7 +93,7 @@ pub mod testing_state {
 
         commands.spawn((
             TextBundle::from_section(
-                "Press SPACE to switch to another state",
+                "Press SPACE to switch to another state...\nPress P to switch to PlayState...",
                 TextStyle{font_size: 20.0, ..default()}
             ).with_style(
                 Style {
@@ -104,6 +114,11 @@ pub mod testing_state {
     ) {
         if keyboard_input.just_pressed(KeyCode::Space) {
             game_state.set(GameState::MainMenuState);
+            return;
+        }
+
+        if keyboard_input.just_pressed(KeyCode::KeyP) {
+            game_state.set(GameState::PlayState);
             return;
         }
 

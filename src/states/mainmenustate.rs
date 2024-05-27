@@ -1,5 +1,8 @@
 pub mod main_menu_state {
-    use bevy::prelude::*;
+    use bevy:: {
+        prelude::*,
+        render::camera::ScalingMode
+    };
     use crate::state::*;
 
     #[derive(Component)]
@@ -20,13 +23,20 @@ pub mod main_menu_state {
                     hdr: true,
                     ..default()
                 },
+                projection: OrthographicProjection {
+                    // don't forget to set `near` and `far`
+                    //scaling_mode: ScalingMode::Fixed{width: 1280.0, height: 720.0},
+                    scaling_mode: ScalingMode::WindowSize(1.0),
+                    // ... any other settings you want to change ...
+                    ..default()
+                },
                 ..default()
             },
             MainMenuStateMember
         ));
         commands.spawn((
             TextBundle::from_section(
-                "IT'S ME MAIN MENU STATE!!!\nPress SPACE to switch back",
+                "IT'S ME MAIN MENU STATE!!!\nPress SPACE to switch back...",
                 TextStyle{font_size: 20.0, ..default()}
             ).with_style({
                 Style {

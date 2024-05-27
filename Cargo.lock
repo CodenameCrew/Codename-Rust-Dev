@@ -1274,6 +1274,7 @@ dependencies = [
  "bevy",
  "serde",
  "serde-xml-rs",
+ "serde_json",
 ]
 
 [[package]]
