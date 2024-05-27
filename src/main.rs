@@ -5,7 +5,8 @@ use bevy::{
     render::{settings::*, RenderPlugin},
     render::settings::RenderCreation::Automatic
 };
-use crate::WgpuSettingsPriority::Functionality;
+use crate::WgpuSettingsPriority;
+
 #[path = "states/state.rs"] mod state;
 #[path = "util/sparrow.rs"] mod sparrow;
 #[path = "util/fpscounter.rs"] mod fpscounter;
@@ -13,12 +14,9 @@ use crate::WgpuSettingsPriority::Functionality;
 // CONSTANTS
 // So we can hide the little flash of white while the engine gets ready...
 const INIT_FRAMES_BEFORE_SHOW:u32 = 4;
-// This is just cause I notice Backends::PRIMARY doesn't choose dx12 on windows, not sure about other platforms
-const INIT_BACKEND:Backends = if cfg!(windows) {Backends::DX12} else {Backends::PRIMARY};
 // Self explanitory, I think you just use Color::NONE for window transperency after you set it in the WindowPlugin
 const INIT_BACKGROUND_COLOR:Color = Color::BLACK;
 
-// INIT
 fn main() {
     let mut app = App::new();
     app.add_plugins((
@@ -39,8 +37,8 @@ fn main() {
             .set(RenderPlugin {
                 render_creation: Automatic(
                     WgpuSettings {
-                        backends: Some(INIT_BACKEND),
-                        priority: Functionality,
+                        backends: Some(Backends::PRIMARY),
+                        priority: WgpuSettingsPriority::Functionality,
                         power_preference: PowerPreference::HighPerformance,
                         ..Default::default()
                     }

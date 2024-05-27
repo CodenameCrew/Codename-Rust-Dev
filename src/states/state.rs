@@ -25,14 +25,12 @@ pub fn despawn_state<T: Component>(to_despawn: Query<Entity, With<T>>, mut comma
 // ! THIS IS A TEMPLATE FOR A GENERIC STATE, DO NOT DELETE!!!!
 // ! ADD TO THE ENUM GameState AND MAKE A COMPONENT FOR MEMBERS OF YOUR STATE
 /*
-#[derive(Component)]
-pub struct StateNameMember;
-
 pub mod state_name_state {
     use bevy::prelude::*;
     use crate::state::*;
 
-    use super::StateNameMember;
+    #[derive(Component)]
+    pub struct StateNameMember;
 
     pub fn plugin(app: &mut App) {
         app

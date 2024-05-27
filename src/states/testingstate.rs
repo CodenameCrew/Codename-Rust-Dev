@@ -1,16 +1,3 @@
-use bevy::prelude::*;
-
-#[derive(Component)]
-pub struct TestingStateMember;
-#[derive(Component)]
-pub struct SwingyFella {
-    pub x_amount:f32,
-    pub y_amount:f32,
-
-    pub x_speed:f32,
-    pub y_speed:f32,
-}
-
 pub mod testing_state {
     use bevy::{
         prelude::*,
@@ -19,8 +6,17 @@ pub mod testing_state {
     use crate::state::*;
     use crate::sparrow::SpriteXMLBundle;
 
-    use super::TestingStateMember;
-    use super::SwingyFella;
+    #[derive(Component)]
+    pub struct TestingStateMember;
+    #[derive(Component)]
+    pub struct SwingyFella {
+        pub x_amount:f32,
+        pub y_amount:f32,
+    
+        pub x_speed:f32,
+        pub y_speed:f32,
+    }
+    
 
     pub fn plugin(app: &mut App) {
         app

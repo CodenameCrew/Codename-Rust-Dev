@@ -1,12 +1,9 @@
-use bevy::prelude::*;
-
-#[derive(Component)]
-pub struct MainMenuStateMember;
-
 pub mod main_menu_state {
     use bevy::prelude::*;
     use crate::state::*;
-    use super::MainMenuStateMember;
+
+    #[derive(Component)]
+    pub struct MainMenuStateMember;
 
     pub fn plugin(app: &mut App) {
         app
