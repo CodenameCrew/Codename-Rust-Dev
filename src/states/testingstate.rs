@@ -1,11 +1,12 @@
 pub mod testing_state {
     use bevy::{
         prelude::*,
-        core_pipeline::{tonemapping::Tonemapping, bloom::BloomSettings},
-        render::camera::ScalingMode
+        core_pipeline::{tonemapping::Tonemapping, bloom::BloomSettings}
     };
     use crate::state::*;
     use crate::sparrow::SpriteXMLBundle;
+
+    use rand::prelude::*;
 
     #[derive(Component)]
     pub struct TestingStateMember;
@@ -28,7 +29,7 @@ pub mod testing_state {
 
     pub fn create(
         mut commands: Commands, asset_server: Res<AssetServer>, 
-        texture_atlas_layouts: ResMut<Assets<TextureAtlasLayout>>
+        mut texture_atlas_layouts: ResMut<'_, Assets<TextureAtlasLayout>> 
     ) {
         commands.spawn((
             Camera2dBundle {
@@ -53,29 +54,33 @@ pub mod testing_state {
             TestingStateMember
         ));
 
-        match SpriteXMLBundle::new("images/logoBumpin".to_string(), &asset_server, texture_atlas_layouts) {
-            Some(mut spritesheet) => {
-                let mut spriteatlas: &mut TextureAtlas = &mut spritesheet.sprite_sheet.atlas;
-                spritesheet.spritexml.add_anim_from_prefix("logo bumpin".to_string(), true, 24);
-                spritesheet.spritexml.apply_offsets(&mut spriteatlas, &mut spritesheet.sprite_sheet.transform);
+        let mut rng = thread_rng();
 
-                spritesheet.spritexml.set_anim("".to_string(), &mut spriteatlas, true);
-
-                spritesheet.sprite_sheet.transform.scale = Vec3::new(0.5, 0.5, 0.5);
-
-                commands.spawn((
-                    spritesheet,
-                    TestingStateMember,
-                    SwingyFella {
-                        x_amount: 60.0,
-                        y_amount: 90.0,
-
-                        x_speed: 2.0,
-                        y_speed: 1.0
-                    }
-                ));
+        for _i in 0..2 {
+            match SpriteXMLBundle::new("images/logoBumpin".to_string(), &asset_server, &mut texture_atlas_layouts) {
+                Some(mut spritesheet) => {
+                    let mut spriteatlas: &mut TextureAtlas = &mut spritesheet.sprite_sheet.atlas;
+                    spritesheet.spritexml.add_anim_from_prefix("logo bumpin".to_string(), true, 24);
+                    spritesheet.spritexml.apply_offsets(&mut spriteatlas, &mut spritesheet.sprite_sheet.transform);
+    
+                    spritesheet.spritexml.set_anim("".to_string(), &mut spriteatlas, true);
+    
+                    spritesheet.sprite_sheet.transform.scale = Vec3::new(0.5, 0.5, 0.5);
+    
+                    commands.spawn((
+                        spritesheet,
+                        TestingStateMember,
+                        SwingyFella {
+                            x_amount: 60.0 * rng.gen_range(1.0 .. 1.3),
+                            y_amount: 90.0 * rng.gen_range(1.0 .. 1.3),
+    
+                            x_speed: 2.0 * rng.gen_range(1.0 .. 1.1),
+                            y_speed: 1.0 * rng.gen_range(1.0 .. 1.1)
+                        }
+                    ));
+                }
+                None => {println!("Error loading XML!");}
             }
-            None => {println!("Error loading XML!");}
         }
 
         commands.spawn((

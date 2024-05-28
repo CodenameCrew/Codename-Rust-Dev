@@ -1,3 +1,6 @@
+#![allow(dead_code)]
+#![allow(non_snake_case)]
+
 use bevy::{
     prelude::*,
     core::FrameCount,
@@ -20,13 +23,13 @@ const INIT_BACKGROUND_COLOR:Color = Color::BLACK;
 
 fn main() {
     // let parsed: ChartData = serde_json::from_str(test).unwrap();
-    match chart::parser::parse(&"smoke and mirrors".to_owned(), Some(&"hard".to_owned())) {
-        Some(chart) => {
+    // match chart::parser::parse(&"smoke and mirrors".to_owned(), Some(&"hard".to_owned())) {
+    //     Some(chart) => {
             // let printed_json = serde_json::to_string(&chart).unwrap();
             // println!("{}", printed_json);
-        }
-        None => println!("None :(")
-    }
+    //    }
+    //     None => println!("None :(")
+    // }
 
     let mut app = App::new();
     app.add_plugins((

@@ -72,7 +72,7 @@ impl SpriteXMLBundle {
     pub fn new(
         path: String,
         asset_loader: &Res<AssetServer>,
-        mut texture_atlas_layouts: ResMut<Assets<TextureAtlasLayout>>
+        texture_atlas_layouts: &mut ResMut<Assets<TextureAtlasLayout>>
     ) -> Option<Self> {
         let image_path:String = path.clone() + ".png";
         let xml_path:String = path.clone() + ".xml";
@@ -196,7 +196,7 @@ impl SpriteXML {
         translation: &mut Transform,
         anim_idx: usize,
     ) {
-        let mut animation = &mut self.animations[anim_idx];
+        let animation = &mut self.animations[anim_idx];
 
         if animation.idx >= animation.idx_range.len() - 1 {
             if animation.looped {
