@@ -158,10 +158,11 @@ pub mod parser {
         if meta.stepsPerBeat == None {meta.stepsPerBeat = Some(4.0)}
         if meta.icon == None {meta.icon = Some("face".to_owned())}
 
-        // TODO: string color parsing (i got no clue lmao)
-        // if meta.color == None {meta.color = None}
-
-        if meta.parsedColor == None {meta.parsedColor = Some(Color::rgb(146.0, 113.0, 253.0))}
+        if meta.color == None {meta.color = Some(serde_json::Value::String("#9271FD".to_owned()))}
+        meta.parsedColor = match meta.color.clone().unwrap() {
+            serde_json::Value::String(color_string) => Some(Color::hex(color_string).unwrap()),
+            _ => Some(Color::rgb(0.0, 0.0, 0.0))
+        };
 
         if meta.difficulties == None {
             let charts_path: String = "assets/".to_owned() + &paths::song_folder(&song) + "charts/";
