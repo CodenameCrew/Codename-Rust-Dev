@@ -1,0 +1,245 @@
+{
+    "events": [],
+    "stage": "stage",
+    "codenameChart": true,
+    "scrollSpeed": 4,
+    "strumLines": [
+      {
+        "strumScale": 1,
+        "position": "dad",
+        "notes": [
+          {
+            "id": 3,
+            "sLen": 0,
+            "time": 11034.4827586207,
+            "type": 0
+          },
+          {
+            "id": 2,
+            "sLen": 0,
+            "time": 11120.6896551724,
+            "type": 0
+          },
+          {
+            "id": 3,
+            "sLen": 0,
+            "time": 11206.8965517241,
+            "type": 0
+          },
+          {
+            "id": 1,
+            "sLen": 0,
+            "time": 11293.1034482759,
+            "type": 0
+          },
+          {
+            "id": 0,
+            "sLen": 0,
+            "time": 11379.3103448276,
+            "type": 0
+          },
+          {
+            "id": 1,
+            "sLen": 0,
+            "time": 11465.5172413793,
+            "type": 0
+          },
+          {
+            "id": 3,
+            "sLen": 0,
+            "time": 11551.724137931,
+            "type": 0
+          },
+          {
+            "id": 0,
+            "sLen": 0,
+            "time": 11724.1379310345,
+            "type": 0
+          },
+          {
+            "id": 1,
+            "sLen": 0,
+            "time": 11724.1379310345,
+            "type": 0
+          },
+          {
+            "id": 2,
+            "sLen": 0,
+            "time": 11896.5517241379,
+            "type": 0
+          },
+          {
+            "id": 3,
+            "sLen": 0,
+            "time": 11982.7586206897,
+            "type": 0
+          },
+          {
+            "id": 1,
+            "sLen": 0,
+            "time": 12068.9655172414,
+            "type": 0
+          },
+          {
+            "id": 3,
+            "sLen": 0,
+            "time": 12241.3793103448,
+            "type": 0
+          },
+          {
+            "id": 0,
+            "sLen": 517.241379310344,
+            "time": 12413.7931034483,
+            "type": 0
+          },
+          {
+            "id": 1,
+            "sLen": 344.827586206897,
+            "time": 12413.7931034483,
+            "type": 0
+          }
+        ],
+        "characters": [
+          "dad"
+        ],
+        "type": 0,
+        "scrollSpeed": null,
+        "visible": true,
+        "strumPos": [
+          0,
+          50
+        ],
+        "strumLinePos": 0.25
+      },
+      {
+        "strumScale": 1,
+        "position": "boyfriend",
+        "notes": [
+          {
+            "id": 2,
+            "sLen": 0,
+            "time": 12413.7931034483,
+            "type": 0
+          },
+          {
+            "id": 3,
+            "sLen": 86.2068965517228,
+            "time": 12413.7931034483,
+            "type": 0
+          },
+          {
+            "id": 1,
+            "sLen": 0,
+            "time": 12586.2068965517,
+            "type": 0
+          },
+          {
+            "id": 0,
+            "sLen": 0,
+            "time": 12672.4137931034,
+            "type": 0
+          },
+          {
+            "id": 2,
+            "sLen": 0,
+            "time": 12758.6206896552,
+            "type": 0
+          },
+          {
+            "id": 3,
+            "sLen": 86.2068965517228,
+            "time": 12758.6206896552,
+            "type": 0
+          },
+          {
+            "id": 1,
+            "sLen": 0,
+            "time": 12931.0344827586,
+            "type": 0
+          },
+          {
+            "id": 0,
+            "sLen": 0,
+            "time": 13017.2413793103,
+            "type": 0
+          },
+          {
+            "id": 2,
+            "sLen": 0,
+            "time": 13103.4482758621,
+            "type": 0
+          },
+          {
+            "id": 3,
+            "sLen": 0,
+            "time": 13189.6551724138,
+            "type": 0
+          },
+          {
+            "id": 1,
+            "sLen": 0,
+            "time": 13275.8620689655,
+            "type": 0
+          },
+          {
+            "id": 0,
+            "sLen": 0,
+            "time": 13362.0689655172,
+            "type": 0
+          },
+          {
+            "id": 3,
+            "sLen": 0,
+            "time": 13448.275862069,
+            "type": 0
+          },
+          {
+            "id": 2,
+            "sLen": 0,
+            "time": 13620.6896551724,
+            "type": 0
+          },
+          {
+            "id": 0,
+            "sLen": 517.241379310344,
+            "time": 13706.8965517241,
+            "type": 0
+          },
+          {
+            "id": 1,
+            "sLen": 344.827586206895,
+            "time": 13706.8965517241,
+            "type": 0
+          }
+        ],
+        "characters": [
+          "bf"
+        ],
+        "type": 1,
+        "scrollSpeed": null,
+        "visible": true,
+        "strumPos": [
+          0,
+          50
+        ],
+        "strumLinePos": 0.75
+      },
+      {
+        "strumScale": 1,
+        "position": "girlfriend",
+        "notes": [],
+        "characters": [
+          "gf"
+        ],
+        "type": 2,
+        "scrollSpeed": null,
+        "visible": false,
+        "strumPos": [
+          0,
+          50
+        ],
+        "strumLinePos": 0.5
+      }
+    ],
+    "noteTypes": []
+  }

@@ -85,6 +85,10 @@ pub mod testing_state {
                     translation: Vec3::new(1280.0/2.0 - 200.0, 720.0/2.0 - 100.0, 0.0),
                     ..default()
                 },
+                sprite: Sprite {
+                    color: Color::rgb(1.5, 1.5, 1.5), // 4. Put something bright in a dark environment to see the effect
+                    ..default()
+                },
                 texture: asset_server.load("images/bevy_bird_dark.png"),
                 ..default()
             },

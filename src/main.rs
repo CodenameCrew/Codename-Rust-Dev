@@ -11,7 +11,7 @@ use crate::WgpuSettingsPriority;
 #[path = "util/sparrow.rs"] mod sparrow;
 #[path = "util/fpscounter.rs"] mod fpscounter;
 #[path = "data/chart.rs"] mod chart;
-use chart::*;
+#[path = "data/paths.rs"] mod paths;
 
 // So we can hide the little flash of white while the engine gets ready...
 const INIT_FRAMES_BEFORE_SHOW:u32 = 4;
@@ -19,30 +19,13 @@ const INIT_FRAMES_BEFORE_SHOW:u32 = 4;
 const INIT_BACKGROUND_COLOR:Color = Color::BLACK;
 
 fn main() {
-    let test: &str = "{
-        \"strumScale\": 1,
-        \"position\": \"girlfriend\",
-        \"notes\": [],
-        \"characters\": [
-          \"gf\"
-        ],
-        \"type\": 2,
-        \"scrollSpeed\": null,
-        \"visible\": false,
-        \"strumPos\": [
-          0,
-          50
-        ],
-        \"strumLinePos\": 0.5
-    }";
-    println!("{}", test);
-
-    let parsed: ChartStrumLine = serde_json::from_str(test).unwrap();
-    match parsed.r#type {
-        ChartStrumLineType::ADDITIONAL => println!("ADDITIONAL"),
-        ChartStrumLineType::OPPONENT => println!("OPPONENT"),
-        ChartStrumLineType::PLAYER => println!("PLAYER"),
-        _ => panic!("Unknown strumline type: {}", parsed.r#type),
+    // let parsed: ChartData = serde_json::from_str(test).unwrap();
+    match chart::parser::parse(&"smoke and mirrors".to_owned(), Some(&"hard".to_owned())) {
+        Some(chart) => {
+            // let printed_json = serde_json::to_string(&chart).unwrap();
+            // println!("{}", printed_json);
+        }
+        None => println!("None :(")
     }
 
     let mut app = App::new();
