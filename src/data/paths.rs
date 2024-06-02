@@ -57,5 +57,5 @@ pub fn difficulty_string(difficulty:Option<&String>) -> String {
 
 #[inline(always)]
 pub fn exists(path: &String) -> bool {
-    return Path::new(path).exists();
+    return Path::new(&("assets/".to_owned() + path)).exists();
 }
