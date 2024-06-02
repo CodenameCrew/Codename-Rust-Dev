@@ -37,16 +37,6 @@ pub mod testing_state {
                     hdr: true,
                     ..default()
                 },
-                /*
-                projection: OrthographicProjection {
-                    // don't forget to set `near` and `far`
-                    near: -1000.0,
-                    far: 1000.0,
-                    scaling_mode: ScalingMode::FixedVertical(720.0),
-                    // ... any other settings you want to change ...
-                    ..default()
-                },
-                */
                 tonemapping: Tonemapping::TonyMcMapface,
                 ..default()
             },
@@ -118,7 +108,8 @@ pub mod testing_state {
 
     pub fn update(
         time: Res<Time>, 
-        mut swingy_fellas:Query<(&SwingyFella, &mut Transform)>, keyboard_input: Res<ButtonInput<KeyCode>>, 
+        mut swingy_fellas:Query<(&SwingyFella, &mut Transform)>, 
+        keyboard_input: Res<ButtonInput<KeyCode>>, 
         mut game_state: ResMut<NextState<GameState>>
     ) {
         if keyboard_input.just_pressed(KeyCode::Space) {

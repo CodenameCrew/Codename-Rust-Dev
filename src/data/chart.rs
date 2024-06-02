@@ -3,6 +3,8 @@ use bevy::render::color::Color;
 use serde::{Deserialize, Serialize};
 use serde_json::Value;
 
+#[path = "stage.rs"] mod stage;
+
 #[derive(Debug, Serialize, Deserialize, PartialEq)]
 pub struct ChartData {
 	pub strumLines: Vec<ChartStrumLine>,
@@ -10,7 +12,7 @@ pub struct ChartData {
     #[serde(default = "default_meta")]
 	pub meta: Option<ChartMetaData>,
 	pub codenameChart: bool,
-	pub stage: String,
+	pub stage: Option<String>,
 	pub scrollSpeed: f64,
 	pub noteTypes: Vec<String>,
 
@@ -102,6 +104,17 @@ impl ChartStrumLineType {
 	*/
     pub const ADDITIONAL: i32 = 2;
 }
+
+pub const BASE_CHART: ChartData = ChartData {
+    strumLines: vec![],
+    events: vec![],
+    meta: None,
+    codenameChart: true,
+    stage: None,
+    scrollSpeed: 1.0,
+    noteTypes: vec![],
+    fromMods: None
+};
 
 pub mod parser {
     use bevy::render::color::Color;

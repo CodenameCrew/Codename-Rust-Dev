@@ -1,8 +1,5 @@
 pub mod main_menu_state {
-    use bevy:: {
-        prelude::*,
-        render::camera::ScalingMode
-    };
+    use bevy::prelude::*;
     use crate::state::*;
 
     #[derive(Component)]
@@ -17,23 +14,8 @@ pub mod main_menu_state {
     }
 
     pub fn create(mut commands: Commands, _asset_server: Res<AssetServer>) {
-        commands.spawn((
-            Camera2dBundle {
-                camera: Camera {
-                    hdr: true,
-                    ..default()
-                },
-                projection: OrthographicProjection {
-                    // don't forget to set `near` and `far`
-                    //scaling_mode: ScalingMode::Fixed{width: 1280.0, height: 720.0},
-                    scaling_mode: ScalingMode::WindowSize(1.0),
-                    // ... any other settings you want to change ...
-                    ..default()
-                },
-                ..default()
-            },
-            MainMenuStateMember
-        ));
+        commands.spawn((default_camera(), MainMenuStateMember));
+        
         commands.spawn((
             TextBundle::from_section(
                 "IT'S ME MAIN MENU STATE!!!\nPress SPACE to switch back...",

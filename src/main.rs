@@ -1,6 +1,8 @@
 #![allow(dead_code)]
 #![allow(non_snake_case)]
 
+use std::path::Path;
+
 use bevy::{
     prelude::*,
     core::FrameCount,
@@ -9,6 +11,7 @@ use bevy::{
     render::settings::RenderCreation::Automatic
 };
 use crate::WgpuSettingsPriority;
+use bevy_kira_audio::prelude::*;
 
 #[path = "states/state.rs"] mod state;
 #[path = "util/sparrow.rs"] mod sparrow;
@@ -22,15 +25,8 @@ const INIT_FRAMES_BEFORE_SHOW:u32 = 4;
 const INIT_BACKGROUND_COLOR:Color = Color::BLACK;
 
 fn main() {
-    // let parsed: ChartData = serde_json::from_str(test).unwrap();
-    // match chart::parser::parse(&"smoke and mirrors".to_owned(), Some(&"hard".to_owned())) {
-    //     Some(chart) => {
-            // let printed_json = serde_json::to_string(&chart).unwrap();
-            // println!("{}", printed_json);
-    //    }
-    //     None => println!("None :(")
-    // }
-
+    println!("{}", Path::new("assets/songs/smoke and mirrors/charts/hard.json").exists());
+    println!("{}", Path::new("assets/songs/smoke and mirrors/charts/med.json").exists());
     let mut app = App::new();
     app.add_plugins((
         // INTERNAL STUFF
@@ -58,6 +54,7 @@ fn main() {
                 ),
                 ..default()
             }),
+            AudioPlugin
     ));
     app.insert_resource(ClearColor(INIT_BACKGROUND_COLOR));
     app.add_systems(Update, make_visible);
